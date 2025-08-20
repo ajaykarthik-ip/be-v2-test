@@ -1,0 +1,5 @@
+venv/
+*.pyc
+/requirements.txt
+localsettings.py
+celerybeat-schedule

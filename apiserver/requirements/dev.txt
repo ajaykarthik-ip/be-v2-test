@@ -1,0 +1,24 @@
+# add this to git ignore if developers on this project need to use different
+# packages because of their system restrictions.
+-r common.txt
+
+astroid==3.0.3  # pylint dep
+autopep8==2.0.4
+black==24.1.1
+cfgv==3.4.0  # pre-commit dep
+dill==0.3.8  # pylint dep
+identify==2.5.33  # pre-commit dep
+isort==5.13.2  # pylint dep
+mccabe==0.7.0  # pylint dep
+mypy-extensions==1.0.0  # black dep
+nodeenv==1.8.0  # pre-commit dep
+pathspec==0.12.1  # black dep
+pre-commit==3.6.0
+# psycopg2 == 2.9.9  # For silicon macs
+psycopg2-binary==2.9.10 # for all other systems
+pycodestyle==2.11.1  # autopep8 dep
+pylint==3.0.3
+PyYAML==6.0.1  # pre-commit dep
+ruff==0.2.1
+setuptools==69.0.3  # pre-commit dep
+tomlkit==0.12.3  # pylint dep
