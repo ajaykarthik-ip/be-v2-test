@@ -9,5 +9,4 @@ urlpatterns = [
     # Helper endpoints
     path('choices/', views.project_choices, name='project-choices'),
     path('active/', views.active_projects_list, name='active-projects'),
-    path('debug/', views.debug_project_create, name='debug-project-create'),
 ]

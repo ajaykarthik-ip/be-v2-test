@@ -27,6 +27,7 @@ class UserManager(BaseUserManager):
             password=password,
         )
         user.staff = True
+        user.designation = "Employee"  
         user.save(using=self._db)
         return user
 
@@ -40,11 +41,21 @@ class UserManager(BaseUserManager):
         )
         user.staff = True
         user.admin = True
+        user.designation = "Manager"  
         user.save(using=self._db)
         return user
 
 
 class User(AbstractBaseUser):
+    DESIGNATION_CHOICES = [
+        ('employee', 'Employee'),
+        ('senior_employee', 'Senior Employee'),
+        ('team_lead', 'Team Lead'),
+        ('manager', 'Manager'),
+        ('senior_manager', 'Senior Manager'),
+        ('director', 'Director'),
+    ]
+    
     objects = UserManager()
 
     email = models.EmailField(
@@ -54,24 +65,41 @@ class User(AbstractBaseUser):
     )
     first_name = models.CharField(max_length=100, blank=True)
     last_name = models.CharField(max_length=100, blank=True)
+    
+    # Add designation field
+    designation = models.CharField(
+        max_length=50,
+        choices=DESIGNATION_CHOICES,
+        default='employee',
+        help_text="User's designation in the company"
+    )
+    
+    # Add company field for "Mobiux Employee"
+    company = models.CharField(max_length=100, default="Mobiux", blank=True)
 
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)  # a admin user; non super-user
     admin = models.BooleanField(default=False)  # a superuser
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = []  # Email & Password are required by default.
+    REQUIRED_FIELDS = []  
 
     def get_full_name(self):
-        # The user is identified by their email address
         return f"{self.first_name} {self.last_name}"
 
     def get_short_name(self):
-        # The user is identified by their email address
         return self.first_name
 
     def __str__(self):
         return f"{self.email}"
+    
+    def get_role_display(self):
+        return f"{self.company} {self.get_designation_display()}"
+    
+    def get_designation_based_on_admin(self):
+        if self.admin:
+            return "Manager"
+        return "Employee"
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"

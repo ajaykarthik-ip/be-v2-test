@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "accounts",
     "projects",
+    "timesheets",
 ]
 
 MIDDLEWARE = [

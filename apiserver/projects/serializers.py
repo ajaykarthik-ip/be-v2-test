@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from .models import Project
-import json
 
 class ProjectSerializer(serializers.ModelSerializer):
     activity_types_list = serializers.ListField(
