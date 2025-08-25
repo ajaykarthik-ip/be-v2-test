@@ -78,8 +78,8 @@ class User(AbstractBaseUser):
     company = models.CharField(max_length=100, default="Mobiux", blank=True)
 
     active = models.BooleanField(default=True)
-    staff = models.BooleanField(default=False)  # a admin user; non super-user
-    admin = models.BooleanField(default=False)  # a superuser
+    staff = models.BooleanField(default=False)  
+    admin = models.BooleanField(default=False)  
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []  
