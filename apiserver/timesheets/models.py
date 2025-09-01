@@ -38,8 +38,9 @@ class Timesheet(models.Model):
     
     class Meta:
         ordering = ['-date', '-created_at']
-        # Modified unique constraint - allows multiple drafts but only one submitted per combination
-        unique_together = ['user', 'project', 'date', 'activity_type', 'status']
+        # Unique constraint - ensure one timesheet per user/project/date/activity combination regardless of status
+        # This prevents confusion between draft and submitted activities with same name
+        unique_together = ['user', 'project', 'date', 'activity_type']
         
         # Database indexes for performance
         indexes = [

@@ -1,12 +1,9 @@
 from django.urls import path
-from . import views
+from .views import ProjectListCreateView, ProjectDetailView, ProjectChoicesView, ActiveProjectsListView
 
 urlpatterns = [
-    # CRUD operations
-    path('', views.project_list_create, name='project-list-create'),
-    path('<int:pk>/', views.project_detail, name='project-detail'),
-    
-    # Helper endpoints
-    path('choices/', views.project_choices, name='project-choices'),
-    path('active/', views.active_projects_list, name='active-projects'),
+    path('', ProjectListCreateView.as_view(), name='project-list-create'),
+    path('<int:pk>/', ProjectDetailView.as_view(), name='project-detail'),
+    path('choices/', ProjectChoicesView.as_view(), name='project-choices'),
+    path('active/', ActiveProjectsListView.as_view(), name='active-projects'),
 ]
